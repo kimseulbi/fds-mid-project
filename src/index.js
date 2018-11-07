@@ -17,7 +17,9 @@ api.interceptors.request.use(function(config) {
 
 const templates = {
   loginForm: document.querySelector("#login").content,
-  member: document.querySelector("#member").content
+  member: document.querySelector("#member").content,
+  productList: document.querySelector("#product-list").content,
+  productItem: document.querySelector("#product-item").content
 };
 
 const rootEl = document.querySelector(".container");
@@ -55,13 +57,10 @@ function logout() {
 async function drawmemberInfo() {
   // 1. 템플릿 복사
   const frag = document.importNode(templates.member, true);
-  if (memberEl.classList.contains('authed')) {
+  if (memberEl.classList.contains("authed")) {
     frag.querySelector(".member-logout").addEventListener("click", e => {
       logout();
       drawcontentPage();
-    });
-    frag.querySelector(".member-join").addEventListener("click", e => {
-      alert("회원가입");
     });
     frag.querySelector(".member-cart").addEventListener("click", e => {
       alert("장바구니");
@@ -90,7 +89,6 @@ async function drawmemberInfo() {
 
 // 로그인화면
 async function drawLoginForm() {
-  console.log('나와라')
   // 1. 템플릿 복사
   const frag = document.importNode(templates.loginForm, true);
   // 2. 요소 선택
@@ -115,9 +113,26 @@ async function drawLoginForm() {
   rootEl.appendChild(frag);
 }
 
-// 메인페이지
+// 메인페이지 상품 목록
 async function drawcontentPage() {
-  alert('메인페이지')
+  // 1. 템플릿 복사
+  const listFrag = document.importNode(templates.productList, true);
+  // 2. 요소 선택
+  const listEl = listFrag.querySelector('.product-list')
+  // 3. 필요한 데이터 불러오기
+  const {data: list} = await api.get('/products')
+  // const res = await api.get('/products')
+  // const list = res.data
+  // console.log(res.data)
+  list.forEach(productItem=>{
+    const frag = document.importNode(templates.productItem, true)
+    const productTitleEl= frag.querySelector('.product-item-title')
+    console.log(frag);
+    productTitleEl.textContent = productItem.title
+    listEl.appendChild(frag)
+  })
+  rootEl.textContent= ''
+  rootEl.appendChild(listFrag)
 }
 
 if (localStorage.getItem("token")) {
@@ -125,9 +140,3 @@ if (localStorage.getItem("token")) {
 }
 
 drawindexPage();
-// 페이지 로드 시 그릴 화면 설정
-// if (localStorage.getItem('token')) {
-//   drawPostList()
-// } else {
-//   drawLoginForm()
-// }

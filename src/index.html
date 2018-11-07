@@ -25,8 +25,7 @@
     </div>
     <div class="container"></div>
     <footer class="footer">
-      <div class="content">
-      </div>
+      <div class="content"></div>
     </footer>
   </div>
 
@@ -43,23 +42,45 @@
 
   <!-- 로그인 폼 -->
   <template id="login">
-    <section class="login">
-      <form class="login-form">
-        <input type="text" name="username" placeholder="아이디">
-        <input type="password" name="password" placeholder="비밀번호">
-        <button>로그인</button>
-      </form>
-      <div>
-        <ul class="login-membar">
-          <li><a href="#">아이디 찾기</a></li>
-          <li><a href="#">비밀번호 찾기</a></li>
-          <li><a href="#">회원가입</a></li>
-        </ul>
-      </div>
-    </section>
+    <div class="main">
+      <section class="login">
+        <form class="login-form">
+          <input type="text" name="username" placeholder="아이디">
+          <input type="password" name="password" placeholder="비밀번호">
+          <button>로그인</button>
+        </form>
+        <div>
+          <ul class="login-membar">
+            <li><a href="#">아이디 찾기</a></li>
+            <li><a href="#">비밀번호 찾기</a></li>
+            <li><a href="#">회원가입</a></li>
+          </ul>
+        </div>
+      </section>
+    </div>
   </template>
 
+  <!-- 상품 리스트(메인화면) -->
+  <template id="product-list">
+    <div class="visual-area">
+      <div class="visual">
+        <div class="visual-img">
+          <div class="visual-text"></div>
+        </div>
+      </div>
+    </div>
+    <div class="main">
+      <div class="product-list"></div>
+    </div>
+  </template>
 
+  <template id="product-item">
+    <div class="product-item">
+      <img src="#" class="product-item-img">
+      <p class="product-item-title"></p>
+      <p class="product-item-price-unit"><span class="product-item-price"></span></p>
+    </div>
+  </template>
 
 
 
