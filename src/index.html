@@ -1,16 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko-KR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>쇼핑몰!</title>
+  <title>배민문방구</title>
   <link rel="stylesheet" href="./index.scss">
 </head>
+
 <body>
   <!-- 템플릿을 이곳에 작성해주세요 -->
+  <!-- wrap -->
+  <div class="wrap">
+    <div class="top">
+      <header class="header">
+        <div class="menu-area">
+          <h1 class="logo">
+            <a href="#"><img src="images/main/logo/logo.png" alt="배민문방구"></a>
+          </h1>
+          <div class="member"></div>
+        </div>
+      </header>
+    </div>
+    <div class="container"></div>
+    <footer class="footer">
+      <div class="content">
+      </div>
+    </footer>
+  </div>
 
-  <div class="root"></div>
+  <!-- member -->
+  <template id="member">
+    <ul class="main-member">
+      <li><a href="#">로그인</a></li>
+      <li><a href="#">회원가입</a></li>
+      <li><a href="#">장바구니</a></li>
+      <li><a href="#">마이페이지</a></li>
+    </ul>
+  </template>
+
+  <!-- 로그인 폼 -->
+  <template id="login">
+    <section class="login">
+      <form class="login-form">
+        <input type="text" name="username" placeholder="아이디">
+        <input type="password" name="password" placeholder="비밀번호">
+        <button>로그인</button>
+      </form>
+      <div>
+        <ul class="login-membar">
+          <li><a href="#">아이디 찾기</a></li>
+          <li><a href="#">비밀번호 찾기</a></li>
+          <li><a href="#">회원가입</a></li>
+        </ul>
+      </div>
+    </section>
+  </template>
+
   <script src="./index.js"></script>
 </body>
+
 </html>
