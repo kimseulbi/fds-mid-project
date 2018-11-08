@@ -214,7 +214,7 @@ body {
 // container
 .container {
   position: relative;
-  // width: 1000px;
+  min-width: 1000px;
   height: 100%;
   margin: 0 auto;
   // 로그인화면
@@ -287,5 +287,18 @@ body {
   .main-area {
     width: 100%;
     margin: 50px 0px 0px 0px;
+    .product-list {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      .product-item {
+        img {
+          position: relative;
+          background: #888;
+          width: 220px;
+          height: 272px;
+        }
+      }
+    }
   }
 }

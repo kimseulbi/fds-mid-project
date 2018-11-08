@@ -101,8 +101,6 @@ async function drawmemberInfo() {
   memberEl.appendChild(frag);
 }
 
-
-
 // 로그인화면
 async function drawLoginForm() {
   // 1. 템플릿 복사
