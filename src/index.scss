@@ -198,14 +198,18 @@ body {
   .member-logout {
     display: none;
   }
-  &.authed {
-    .member-logout {
+  .member-logout {
+    body.authed & {
       display: inline-block;
     }
-    .member-login {
+  }
+  .member-login {
+    body.authed & {
       display: none;
     }
-    .member-join {
+  }
+  .member-join {
+    body.authed & {
       display: none;
     }
   }

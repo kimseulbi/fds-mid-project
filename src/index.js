@@ -51,21 +51,20 @@ async function drawindexPage() {
 function login(token) {
   localStorage.setItem("token", token);
   api.defaults.headers["Authorization"] = `Bearer ${token}`;
-  memberEl.classList.add("authed");
+  document.body.classList.add("authed");
 }
 
 // logout을 누르면
 function logout() {
   localStorage.removeItem("token");
-  delete api.defaults.headers["Authorization"];
-  memberEl.classList.remove("authed");
+  document.body.classList.remove("authed");
 }
 
 // 헤더 member메뉴
 async function drawmemberInfo() {
   // 1. 템플릿 복사
   const frag = document.importNode(templates.member, true);
-  if (memberEl.classList.contains("authed")) {
+  if (document.body.classList.contains("authed")) {
     frag.querySelector(".member-logout").addEventListener("click", e => {
       logout();
       drawMainPage();
@@ -78,7 +77,6 @@ async function drawmemberInfo() {
     });
   } else {
     frag.querySelector(".member-login").addEventListener("click", e => {
-      login();
       drawLoginForm();
     });
     frag.querySelector(".member-join").addEventListener("click", e => {
@@ -115,6 +113,7 @@ async function drawLoginForm() {
       password
     });
     localStorage.setItem("token", res.data.token);
+    document.body.classList.add('authed')
     drawMainPage();
   });
   // 6. 템플릿을 문서에 삽입
