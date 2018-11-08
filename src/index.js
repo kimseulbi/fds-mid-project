@@ -24,6 +24,7 @@ const templates = {
 
 const rootEl = document.querySelector(".container");
 const memberEl = document.querySelector(".member");
+const logoEl = document.querySelector('.logo');
 
 // 페이지 그리는 함수 작성 순서
 // 1. 템플릿 복사
@@ -32,6 +33,12 @@ const memberEl = document.querySelector(".member");
 // 4. 내용 채우기
 // 5. 이벤트 리스너 등록하기
 // 6. 템플릿을 문서에 삽입
+
+// 로고를 누르면 첫페이지로 이동
+logoEl.addEventListener('click', e => {
+  e.preventDefault();
+  drawindexPage();
+});
 
 // 인덱스페이지
 async function drawindexPage() {
@@ -59,26 +66,33 @@ async function drawmemberInfo() {
   const frag = document.importNode(templates.member, true);
   if (memberEl.classList.contains("authed")) {
     frag.querySelector(".member-logout").addEventListener("click", e => {
+      e.preventDefault();
       logout();
       drawcontentPage();
     });
     frag.querySelector(".member-cart").addEventListener("click", e => {
+      e.preventDefault();
       alert("장바구니");
     });
     frag.querySelector(".member-mypage").addEventListener("click", e => {
+      e.preventDefault();
       alert("마이페이지");
     });
   } else {
     frag.querySelector(".member-login").addEventListener("click", e => {
+      e.preventDefault();
       drawLoginForm();
     });
     frag.querySelector(".member-join").addEventListener("click", e => {
+      e.preventDefault();
       alert("회원가입");
     });
     frag.querySelector(".member-cart").addEventListener("click", e => {
+      e.preventDefault();
       alert("장바구니");
     });
     frag.querySelector(".member-mypage").addEventListener("click", e => {
+      e.preventDefault();
       alert("마이페이지");
     });
   }
@@ -86,6 +100,8 @@ async function drawmemberInfo() {
   memberEl.textContent = "";
   memberEl.appendChild(frag);
 }
+
+
 
 // 로그인화면
 async function drawLoginForm() {
