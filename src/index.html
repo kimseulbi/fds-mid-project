@@ -13,16 +13,14 @@
   <!-- 템플릿을 이곳에 작성해주세요 -->
   <!-- wrap -->
   <div class="wrap">
-    <div class="top">
-      <header class="header">
-        <div class="menu-area">
-          <h1 class="logo">
-            <a href="#"><img src="images/main/logo/logo.png" alt="배민문방구"></a>
-          </h1>
-          <div class="member"></div>
-        </div>
-      </header>
-    </div>
+    <header class="header">
+      <div class="menu-area">
+        <h1 class="logo">
+          <a href="#"><img src="images/main/logo/logo.png" alt="배민문방구"></a>
+        </h1>
+        <div class="member"></div>
+      </div>
+    </header>
     <div class="container"></div>
     <footer class="footer">
       <div class="content"></div>
@@ -47,7 +45,7 @@
         <form class="login-form">
           <input type="text" name="username" placeholder="아이디">
           <input type="password" name="password" placeholder="비밀번호">
-          <button>로그인</button>
+          <button class="but-primary">로그인</button>
         </form>
         <div>
           <ul class="login-membar">
@@ -78,52 +76,106 @@
 
   <template id="product-item">
     <div class="product-item">
-      <img src="#" class="product-item-img">
-      <p class="product-item-title"></p>
-      <p class="product-item-price-unit">
-        <span class="product-item-before-price"></span>
-        <span class="product-item-price"></span>
-      </p>
+      <img src="#" class="item-img">
+      <div class="item-box">
+        <p class="item-title"></p>
+        <p class="item-price-unit">
+          <strike class="item-before-price"></strike>
+          <span class="item-price"></span>
+        </p>
+      </div>
     </div>
   </template>
 
 
   <!-- 상품 상세화면 -->
   <template id="product-details">
-    <button class="btn-back">뒤로</button>
-    <div class="product-details-page">
-      <div class="product-details-info">
-        <img src="#" alt="#" class="product-details-img">
-        <section class="product-details-box field">
-          <h3 class="product-details-title"></h3>
-          <dl class="product-details-list">
-            <dt class="product-details-subtitle">판매가격</dt>
-            <dd class="product-details-price"></dd>
-            <dd class="product-details-before-price"></dd>
-            <dt class="product-details-subtitle">제조사</dt>
-            <dd class="product-details-manufacturer"></dd>
-            <dt class="product-details-subtitle">구매수량</dt>
-            <dd class="product-details-count">
-              <input type="number" value="1" /><span>개</span>
-            </dd>
-          </dl>
-          <div>
-            <button class="product-details-btn-buy">구매하기</button>
-          </div>
-          <div class="product-details-btn-set">
-            <button class="product-details__btn-cart">장바구니</button>
-            <button class="product-details__btn-dibs">찜하기</button>
-          </div>
+    <section class="details-area">
+      <button class="btn-back">뒤로</button>
+      <div class="details-box">
+        <img src="#" alt="#" class="details-img">
+        <div class="details-info">
+          <h3 class="details-title"></h3>
+          <form class="cart-form">
+            <dl class="details-list">
+              <dt class="subtitle">판매가격</dt>
+              <dd class="details-price"></dd>
+              <dd class="details-before-price"></dd>
+              <dt class="subtitle">제조사</dt>
+              <dd class="details-manufacturer"></dd>
+              <dt class="subtitle count-tilte">구매수량</dt>
+              <dd class="details-count">
+                <input type="number" value="1" name="quantity" class="quantity input-number" /><span>개</span>
+              </dd>
+            </dl>
+            <div>
+              <button class="details-btn-buy but-primary">구매하기</button>
+            </div>
+            <div class="details-btn-set">
+              <button class="details-btn-cart but-default">장바구니</button>
+              <button class="details-btn-dibs but-default">찜하기</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </template>
 
-        </section>
+  <!-- 장바구니 -->
+  <template id="cart-list">
+    <div class="area">
+      <h2 class="tilte">장바구니</h2>
+      <div class="cart-list"></div>
+      <div class="total-price-area">
+        <p class="list-total-price"><span>원</span></p>
       </div>
     </div>
   </template>
 
-  <!-- 장바구니 -->
-  <template id="cart">
-
+  <template id="cart-item">
+    <form class="cart-item">
+      <table>
+        <thead>
+          <tr>
+            <th>선택</th>
+            <th>상품정보</th>
+            <th>수량</th>
+            <th>배송비</th>
+            <th>합계</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <input type="checkbox" name="complete" class="complete">
+            </td>
+            <td>
+              <a href="#"><img src="#" alt="#" class="item-img"></a>
+            </td>
+            <td>
+              <div class="item-title"></div>
+              <button class="item-option">선택옵션</button>
+            </td>
+            <td>
+              <p class="item-price"><span>원</span></p>
+            </td>
+            <td>
+              <div class="item-count"></div>
+              <button class="item-modified">수정</button>
+            </td>
+            <td>
+              <p>기본배송</p>
+            </td>
+            <td>
+              <p class="item-total-price"><span>원</span></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+    </div>
   </template>
+
   <script src="./index.js"></script>
 </body>
 

@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,700");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500");
 
 $main-color: #fff;
+$num-font-family: "Montserrat", sans-serif;
 
 /* 스타일 초기화*/
 html,
@@ -174,44 +176,41 @@ body {
   height: 90px;
   margin-right: 10px;
 }
-.member {
-  li {
-    float: left;
-    text-align: right;
-
-    margin-right: 22px;
+li {
+  float: left;
+  text-align: right;
+  margin-right: 22px;
+}
+li,
+a {
+  display: inline-block;
+}
+a {
+  font-size: 1.2rem;
+  color: rgba(0, 0, 0, 0.3);
+  line-height: 90px;
+  font-weight: 700;
+  height: 90px;
+  &:hover {
+    color: #666;
   }
-  li,
-  a {
+}
+.member-logout {
+  display: none;
+}
+.member-logout {
+  body.authed & {
     display: inline-block;
   }
-  a {
-    font-size: 1.2rem;
-    color: rgba(0, 0, 0, 0.3);
-    line-height: 90px;
-    font-weight: 700;
-    height: 90px;
-    &:hover {
-      color: #666;
-    }
-  }
-  .member-logout {
+}
+.member-login {
+  body.authed & {
     display: none;
   }
-  .member-logout {
-    body.authed & {
-      display: inline-block;
-    }
-  }
-  .member-login {
-    body.authed & {
-      display: none;
-    }
-  }
-  .member-join {
-    body.authed & {
-      display: none;
-    }
+}
+.member-join {
+  body.authed & {
+    display: none;
   }
 }
 
@@ -239,18 +238,6 @@ body {
       font-size: 1.5rem;
       color: #333;
       background-color: #fff;
-    }
-    button {
-      text-align: center;
-      height: 64px;
-      background-color: #444;
-      width: 450px;
-      line-height: 64px;
-      -webkit-appearance: none;
-      border-radius: 0;
-      color: #fff;
-      font-size: 1.6rem;
-      font-weight: 700;
     }
     .login-membar {
       margin-top: 1em;
@@ -302,7 +289,140 @@ body {
           width: 220px;
           height: 272px;
         }
+        .item-box {
+          padding: 1em 0 4rem 0;
+          background-color: #fff;
+        }
+        .item-title {
+          color: #222;
+          font-size: 1em;
+          font-weight: 700;
+          width: 217px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+        .item-price-unit {
+          float: right;
+          font-family: $num-font-family;
+          font-size: 1em;
+          .item-price {
+            color: #222;
+            font-weight: 700;
+            border-bottom: 2px solid #222;
+          }
+          .item-before-price {
+            font-weight: 400;
+            color: #999;
+            margin-right: 0.5em;
+          }
+        }
       }
     }
   }
+  // 상품 상세
+  .details-area {
+    margin: 140px auto 0px auto;
+    width: 906px;
+    .details-box {
+      display: flex;
+      flex-direction: row;
+      .details-list {
+        height: 300px;
+      }
+      img {
+        width: 400px;
+        height: 498px;
+        text-align: left;
+        background-color: #e6e6e6;
+        margin-right: 5rem;
+      }
+      .details-info {
+        h3 {
+          font-size: 2.1em;
+          font-weight: 700;
+          margin-bottom: 1em;
+        }
+        .details-list {
+          text-align: left;
+          font-size: 1em;
+          color: #888;
+          line-height: 28px;
+          .count-tilte{
+            line-height: 50px;
+          }
+          dt {
+            width: 140px;
+            float: left;
+          }
+          dd {
+            color: #333;
+            font-weight: 500;
+            span {
+              margin-left: 0.8em;
+            }
+          }
+          .details-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: $num-font-family;
+          }
+        }
+        .details-btn-buy{
+          margin-bottom: 10px;
+        }
+        .details-btn-set{
+          display: flex;
+          button{
+            width: 50%;
+          }
+        }
+      }
+    }
+  }
+}
+
+// input 디자인
+.input-number {
+  text-align: center;
+  height: 38px;
+  width: 50px;
+  color: #555;
+  font-size: 1.2rem;
+  line-height: 38px;
+  margin: 8px 0;
+  border: 1px solid #cccccc;
+}
+// button 디자인
+.but-primary {
+  text-align: center;
+  height: 60px;
+  background-color: #444;
+  width: 450px;
+  line-height: 60px;
+  -webkit-appearance: none;
+  border-radius: 0;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.6rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  &:hover{
+    background-color: #222;
+  }
+}
+.but-default {
+    height: 60px;
+    line-height: 60px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    display: list-item;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #a4a4a4;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    &:hover{
+    background-color: #f6f6f6;
+    }
 }
