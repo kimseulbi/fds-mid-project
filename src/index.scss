@@ -112,20 +112,21 @@ main {
 ul {
   list-style-type: none;
 }
-
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
 /* 하이퍼링크 스타일 */
 a {
   color: inherit;
   text-decoration: none;
   /* cursor: crosshair; */
 }
-
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
-
 .main,
 .menu-area,
 .slogan,
@@ -133,6 +134,46 @@ a {
   width: 1000px;
   margin: 0 auto;
 }
+/*  css 모듈
+    가상요소 clearfix 제작
+*/
+.clearfix::after{
+    /* 상자를 만들어주려면 content="" null값 필요  */
+    content: "";
+    display: block;
+    clear: both;
+}
+/* 숨김 콘텐츠 */
+.readable-hidden, .skip-nav, legend{
+    /* 콘텐츠를 아예 없음*/
+    /* display: none; */
+    /* 화면에서 감춰지지만접근 할수 없음*/
+    /* visibility: hidden; */
+    /* 숨김처리 트릭 화면에서 멀리 보내기*/
+    /* position: relative;
+    left: -9999em; */
+    /* 접근할수 있으면서 화면에서만 안보이게 하는 트릭 */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    margin:-1px;
+    /* 사각형 단위로 짤라내기 */
+    clip: rect(0,0,0,0);
+}
+/* 동적으로 보이도록 처리 */
+.skip-nav:focus{
+    width: 100%;
+    height: auto;
+    padding: 1em;
+    background: #000;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    clip: rect(auto,auto,auto,auto);
+    z-index: 100;
+}
+
 html {
   font-size: 10px;
 }
@@ -174,7 +215,7 @@ body {
   border: none;
   float: right;
   height: 90px;
-  margin-right: 10px;
+  margin-right: -50px;
 }
 li {
   float: left;
