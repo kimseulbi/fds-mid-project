@@ -80,7 +80,43 @@
     <div class="product-item">
       <img src="#" class="product-item-img">
       <p class="product-item-title"></p>
-      <p class="product-item-price-unit"><span class="product-item-price"></span></p>
+      <p class="product-item-price-unit">
+        <span class="product-item-before-price"></span>
+        <span class="product-item-price"></span>
+      </p>
+    </div>
+  </template>
+
+
+  <!-- 상품 상세화면 -->
+  <template id="product-details">
+    <button class="btn-back">뒤로</button>
+    <div class="product-details-page">
+      <div class="product-details-info">
+        <img src="#" alt="#" class="product-details-img">
+        <section class="product-details-box field">
+          <h3 class="product-details-title"></h3>
+          <dl class="product-details-list">
+            <dt class="product-details-subtitle">판매가격</dt>
+            <dd class="product-details-price"></dd>
+            <dd class="product-details-before-price"></dd>
+            <dt class="product-details-subtitle">제조사</dt>
+            <dd class="product-details-manufacturer"></dd>
+            <dt class="product-details-subtitle">구매수량</dt>
+            <dd class="product-details-count">
+              <input type="number" value="1" /><span>개</span>
+            </dd>
+          </dl>
+          <div>
+            <button class="product-details-btn-buy">구매하기</button>
+          </div>
+          <div class="product-details-btn-set">
+            <button class="product-details__btn-cart">장바구니</button>
+            <button class="product-details__btn-dibs">찜하기</button>
+          </div>
+
+        </section>
+      </div>
     </div>
   </template>
 

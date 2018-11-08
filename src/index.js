@@ -19,7 +19,8 @@ const templates = {
   loginForm: document.querySelector("#login").content,
   member: document.querySelector("#member").content,
   productList: document.querySelector("#product-list").content,
-  productItem: document.querySelector("#product-item").content
+  productItem: document.querySelector("#product-item").content,
+  productDetails: document.querySelector('#product-details').content,
 };
 
 const rootEl = document.querySelector(".container");
@@ -43,7 +44,7 @@ logoEl.addEventListener('click', e => {
 // 인덱스페이지
 async function drawindexPage() {
   drawmemberInfo();
-  drawcontentPage();
+  drawMainPage();
 }
 
 // login을 누르면
@@ -66,33 +67,27 @@ async function drawmemberInfo() {
   const frag = document.importNode(templates.member, true);
   if (memberEl.classList.contains("authed")) {
     frag.querySelector(".member-logout").addEventListener("click", e => {
-      e.preventDefault();
       logout();
-      drawcontentPage();
+      drawMainPage();
     });
     frag.querySelector(".member-cart").addEventListener("click", e => {
-      e.preventDefault();
       alert("장바구니");
     });
     frag.querySelector(".member-mypage").addEventListener("click", e => {
-      e.preventDefault();
       alert("마이페이지");
     });
   } else {
     frag.querySelector(".member-login").addEventListener("click", e => {
-      e.preventDefault();
+      login();
       drawLoginForm();
     });
     frag.querySelector(".member-join").addEventListener("click", e => {
-      e.preventDefault();
       alert("회원가입");
     });
     frag.querySelector(".member-cart").addEventListener("click", e => {
-      e.preventDefault();
       alert("장바구니");
     });
     frag.querySelector(".member-mypage").addEventListener("click", e => {
-      e.preventDefault();
       alert("마이페이지");
     });
   }
@@ -120,7 +115,7 @@ async function drawLoginForm() {
       password
     });
     localStorage.setItem("token", res.data.token);
-    drawcontentPage();
+    drawMainPage();
   });
   // 6. 템플릿을 문서에 삽입
   rootEl.textContent = "";
@@ -128,7 +123,7 @@ async function drawLoginForm() {
 }
 
 // 메인페이지 상품 목록
-async function drawcontentPage() {
+async function drawMainPage() {
   // 1. 템플릿 복사
   const listFrag = document.importNode(templates.productList, true);
   // 2. 요소 선택
@@ -149,16 +144,55 @@ async function drawcontentPage() {
     const productTitleEl = frag.querySelector(".product-item-title");
     const productImgEl = frag.querySelector(".product-item-img");
     const productPriceEl = frag.querySelector(".product-item-price");
-    console.log(frag);
+    const productBeforePriceEl = frag.querySelector(".product-item-before-price");
     productTitleEl.textContent = productItem.title;
     productImgEl.setAttribute("src", productItem.mainImgUrl);
     productImgEl.setAttribute("alt", productItem.title);
     productPriceEl.textContent = productItem.options[0].price.toLocaleString();
+    productBeforePriceEl.textContent = productItem.options[0].beforePrice;
     listEl.appendChild(frag);
+    productImgEl.addEventListener('click', e => {
+      drawProductDetailsPage(productItem.id);
+    })
+    productTitleEl.addEventListener("click", e => {
+      drawProductDetailsPage(productItem.id);
+    });
+    productPriceEl.addEventListener("click", e => {
+      drawProductDetailsPage(productItem.id);
+    });
   });
   rootEl.textContent = "";
   rootEl.appendChild(listFrag);
 }
+
+// 상품 상세 페이지
+async function drawProductDetailsPage(productId) {
+  // 1. 템플릿 복사
+  const frag = document.importNode(templates.productDetails, true);
+  // 2. 요소 선택
+  const productImgEl = frag.querySelector(".product-details-img");
+  const productTitleEl = frag.querySelector(".product-details-title");
+  const productBeforePriceEl = frag.querySelector(".product-details-before-price");
+  const productPriceEl = frag.querySelector(".product-details-price");
+  // 3. 필요한 데이터 불러오기
+  const { data: item } = await api.get(`/products/${productId}`, {
+    params: {
+      _embed: "options"
+    }
+  });
+  // 4. 내용 채우기
+  productTitleEl.textContent = item.title;
+  productImgEl.setAttribute("src", item.mainImgUrl);
+  productImgEl.setAttribute("alt", item.title);
+  productBeforePriceEl.textContent = item.options[0].beforePrice;
+  productPriceEl.textContent = item.options[0].price.toLocaleString();
+  // 5. 이벤트 리스너 등록하기
+  // 6. 템플릿을 문서에 삽입
+  rootEl.textContent = "";
+  rootEl.appendChild(frag);
+}
+
+
 
 if (localStorage.getItem("token")) {
   login(localStorage.getItem("token"));
