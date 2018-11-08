@@ -39,14 +39,14 @@ async function drawindexPage() {
   drawcontentPage();
 }
 
-// login일때
+// login을 누르면
 function login(token) {
   localStorage.setItem("token", token);
   api.defaults.headers["Authorization"] = `Bearer ${token}`;
   memberEl.classList.add("authed");
 }
 
-// logout일때
+// logout을 누르면
 function logout() {
   localStorage.removeItem("token");
   delete api.defaults.headers["Authorization"];
@@ -118,21 +118,32 @@ async function drawcontentPage() {
   // 1. 템플릿 복사
   const listFrag = document.importNode(templates.productList, true);
   // 2. 요소 선택
-  const listEl = listFrag.querySelector('.product-list')
+  const listEl = listFrag.querySelector(".product-list");
   // 3. 필요한 데이터 불러오기
-  const {data: list} = await api.get('/products')
+  const { data: list } = await api.get("/products", {
+    params: {
+      _embed: "options"
+    }
+  });
   // const res = await api.get('/products')
   // const list = res.data
-  // console.log(res.data)
-  list.forEach(productItem=>{
-    const frag = document.importNode(templates.productItem, true)
-    const productTitleEl= frag.querySelector('.product-item-title')
+  console.log(list);
+  list.forEach(productItem => {
+    // 1. 템플릿 복사
+    const frag = document.importNode(templates.productItem, true);
+    // 2. 요소 선택
+    const productTitleEl = frag.querySelector(".product-item-title");
+    const productImgEl = frag.querySelector(".product-item-img");
+    const productPriceEl = frag.querySelector(".product-item-price");
     console.log(frag);
-    productTitleEl.textContent = productItem.title
-    listEl.appendChild(frag)
-  })
-  rootEl.textContent= ''
-  rootEl.appendChild(listFrag)
+    productTitleEl.textContent = productItem.title;
+    productImgEl.setAttribute("src", productItem.mainImgUrl);
+    productImgEl.setAttribute("alt", productItem.title);
+    productPriceEl.textContent = productItem.options[0].price.toLocaleString();
+    listEl.appendChild(frag);
+  });
+  rootEl.textContent = "";
+  rootEl.appendChild(listFrag);
 }
 
 if (localStorage.getItem("token")) {

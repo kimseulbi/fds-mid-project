@@ -266,22 +266,26 @@ body {
       }
     }
   }
-  // 메인
-}
-// 비주얼
-.visual-area {
-  width: 100%;
-  height: 500px;
-  margin-top: 90px;
-
-  .visual-img {
+  // 비주얼
+  .visual-area {
     width: 100%;
     height: 500px;
-    background-color: rgb(237, 236, 236);
-    background: url("images/main/banner/sample2_2.png"),
-      url("images/main/banner/sample2_1.jpg") no-repeat;
-    background-size: cover;
-    text-align: center;
-    left: 100%;
+    margin-top: 90px;
+
+    .visual-img {
+      width: 100%;
+      height: 500px;
+      background-color: rgb(237, 236, 236);
+      background: url("images/main/banner/sample2_2.png"),
+        url("images/main/banner/sample2_1.jpg") no-repeat;
+      background-size: cover;
+      text-align: center;
+      left: 100%;
+    }
+  }
+  // 메인
+  .main-area {
+    width: 100%;
+    margin: 50px 0px 0px 0px;
   }
 }
