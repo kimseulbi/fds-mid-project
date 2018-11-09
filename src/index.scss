@@ -113,8 +113,8 @@ ul {
   list-style-type: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 /* 하이퍼링크 스타일 */
 a {
@@ -130,48 +130,50 @@ a {
 .main,
 .menu-area,
 .slogan,
-.footer {
+.footer-area {
   width: 1000px;
   margin: 0 auto;
 }
 /*  css 모듈
     가상요소 clearfix 제작
 */
-.clearfix::after{
-    /* 상자를 만들어주려면 content="" null값 필요  */
-    content: "";
-    display: block;
-    clear: both;
+.clearfix::after {
+  /* 상자를 만들어주려면 content="" null값 필요  */
+  content: "";
+  display: block;
+  clear: both;
 }
 /* 숨김 콘텐츠 */
-.readable-hidden, .skip-nav, legend{
-    /* 콘텐츠를 아예 없음*/
-    /* display: none; */
-    /* 화면에서 감춰지지만접근 할수 없음*/
-    /* visibility: hidden; */
-    /* 숨김처리 트릭 화면에서 멀리 보내기*/
-    /* position: relative;
+.readable-hidden,
+.skip-nav,
+legend {
+  /* 콘텐츠를 아예 없음*/
+  /* display: none; */
+  /* 화면에서 감춰지지만접근 할수 없음*/
+  /* visibility: hidden; */
+  /* 숨김처리 트릭 화면에서 멀리 보내기*/
+  /* position: relative;
     left: -9999em; */
-    /* 접근할수 있으면서 화면에서만 안보이게 하는 트릭 */
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    margin:-1px;
-    /* 사각형 단위로 짤라내기 */
-    clip: rect(0,0,0,0);
+  /* 접근할수 있으면서 화면에서만 안보이게 하는 트릭 */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  margin: -1px;
+  /* 사각형 단위로 짤라내기 */
+  clip: rect(0, 0, 0, 0);
 }
 /* 동적으로 보이도록 처리 */
-.skip-nav:focus{
-    width: 100%;
-    height: auto;
-    padding: 1em;
-    background: #000;
-    color: #fff;
-    text-align: center;
-    margin: 0;
-    clip: rect(auto,auto,auto,auto);
-    z-index: 100;
+.skip-nav:focus {
+  width: 100%;
+  height: auto;
+  padding: 1em;
+  background: #000;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  clip: rect(auto, auto, auto, auto);
+  z-index: 100;
 }
 
 html {
@@ -273,33 +275,44 @@ a {
       display: block;
       position: relative;
       border: 1px solid #ddd;
-      width: 450px;
+      width: 470px;
       height: 50px;
       padding-left: 20px;
       font-size: 1.5rem;
       color: #333;
       background-color: #fff;
     }
-    .login-membar-area{
+    .login-membar-area {
       display: flex;
-      justify-content:center;
+      justify-content: center;
+      height: 70px;
     }
     .login-membar {
       margin-top: 1em;
+      li {
+        margin-right: 0;
+      }
       li,
       a {
         display: inline-block;
+        text-align: center;
       }
       a {
+        height: 30px;
         font-size: 1.2rem;
         color: #999;
         line-height: 1.2rem;
-        padding: 8px 10px;
+        padding: 8px 20px;
       }
       li:nth-child(n + 2)::before {
         content: "|";
         color: #999;
       }
+    }
+    .line {
+      width: 470px;
+      height: 1px;
+      background-color: #ddd;
     }
   }
   // 비주얼
@@ -351,6 +364,7 @@ a {
           float: right;
           font-family: $num-font-family;
           font-size: 1em;
+          margin-top: 0.8em;
           .item-price {
             color: #222;
             font-weight: 700;
@@ -393,7 +407,7 @@ a {
           font-size: 1em;
           color: #888;
           line-height: 28px;
-          .count-tilte{
+          .count-tilte {
             line-height: 50px;
           }
           dt {
@@ -413,16 +427,43 @@ a {
             font-family: $num-font-family;
           }
         }
-        .details-btn-buy{
+        .details-btn-buy {
           margin-bottom: 10px;
         }
-        .details-btn-set{
+        .details-btn-set {
           display: flex;
-          button{
+          button {
             width: 50%;
           }
         }
       }
+    }
+  }
+  .login-none {
+    height: 161px;
+  }
+}
+
+// 푸터
+.footer {
+  margin-top: 100px;
+  width: 100%;
+  height: 230px;
+  border-bottom: 1px solid #333;
+  background-color: #333;
+  position: relative;
+  .footer-logo {
+    position: absolute;
+    top: 30px;
+    right: 60px;
+    img {
+      width: 90px;
+    }
+  }
+  .footer-membar {
+    a {
+      font-size: 1.2rem;
+      color: #8b8b8b;
     }
   }
 }
@@ -439,11 +480,12 @@ a {
   border: 1px solid #cccccc;
 }
 // button 디자인
-.but-primary {
+.btn-primary {
+  border: 0;
   text-align: center;
   height: 60px;
   background-color: #444;
-  width: 450px;
+  width: 470px;
   line-height: 60px;
   -webkit-appearance: none;
   border-radius: 0;
@@ -452,22 +494,42 @@ a {
   font-size: 1.6rem;
   font-weight: 700;
   transition: all 0.2s ease;
-  &:hover{
+  &:hover {
     background-color: #222;
   }
 }
-.but-default {
-    height: 60px;
-    line-height: 60px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    display: list-item;
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: #a4a4a4;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    &:hover{
+.btn-default {
+  border: 0;
+  height: 60px;
+  line-height: 60px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  display: list-item;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #a4a4a4;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  &:hover {
     background-color: #f6f6f6;
-    }
+  }
+}
+.btn-facebook {
+  border: 0;
+  text-align: center;
+  height: 60px;
+  text-transform: uppercase;
+  background-color: #3d66a2;
+  width: 470px;
+  line-height: 60px;
+  -webkit-appearance: none;
+  border-radius: 0;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  font-size: 1.6rem;
+  color: #fff;
+  &:hover {
+    background-color: #2a5697;
+  }
 }
