@@ -145,15 +145,19 @@
           <form class="cart-form">
             <dl class="details-list">
               <dt class="subtitle">판매가격</dt>
-              <dd class="details-price"></dd>
-              <dd class="details-before-price"></dd>
+              <dd class="price">
+                <strike class="details-before-price"></strike>
+                <span class="details-price"></span>
+              </dd>
               <dt class="subtitle">제조사</dt>
               <dd class="details-manufacturer"></dd>
               <dt class="subtitle count-tilte">구매수량</dt>
               <dd class="details-count">
-                  <select class="options readable-hidden" name="option">
+                <div class="readable-hidden">
+                  <select class="options" name="option">
                     <option value=""></option>
                   </select>
+                </div>
                 <input type="number" value="1" name="quantity" class="quantity input-number" /><span>개</span>
               </dd>
             </dl>
@@ -172,7 +176,7 @@
 
   <!-- 장바구니 -->
   <template id="cart-list">
-    <div class="area">
+    <div class="cart-area">
       <h2 class="tilte">장바구니</h2>
       <div class="cart-list"></div>
       <div class="total-price-area">
