@@ -21,8 +21,8 @@ const templates = {
   productList: document.querySelector("#product-list").content,
   productItem: document.querySelector("#product-item").content,
   productDetails: document.querySelector("#product-details").content,
-  cartList: document.querySelector("#cart-list").content,
-  cartItem: document.querySelector("#cart-item").content
+  cartListTemp: document.querySelector("#cart-list").content,
+  cartItemTemp: document.querySelector("#cart-item").content
 };
 
 const rootEl = document.querySelector(".container");
@@ -137,7 +137,7 @@ async function drawMainPage() {
   });
   // const res = await api.get('/products')
   // const list = res.data
-  console.log("메인페이지 상품데이터: ",list);
+  console.log("메인페이지 상품데이터: ", list);
   list.forEach(productItem => {
     // 1. 템플릿 복사
     const frag = document.importNode(templates.productItem, true);
@@ -181,30 +181,51 @@ async function drawProductDetailsPage(productId) {
   const productPriceEl = frag.querySelector(".details-price");
   const productmanufacturerEl = frag.querySelector(".details-manufacturer");
   const cartFromEl = frag.querySelector(".cart-form");
+  const optionSelectEl = frag.querySelector('.options > option');
   // 3. 필요한 데이터 불러오기
   const { data: item } = await api.get(`/products/${productId}`, {
     params: {
       _embed: "options"
     }
   });
+  console.log('제품정보', item.options)
+
   // 4. 내용 채우기
   productTitleEl.textContent = item.title;
   productImgEl.setAttribute("src", item.mainImgUrl);
   productImgEl.setAttribute("alt", item.title);
   productBeforePriceEl.textContent = item.options[0].beforePrice;
-  productPriceEl.textContent = item.options[0].price.toLocaleString();
+  productPriceEl.textContent = item.options[0].price.toLocaleString() + "원";
   productmanufacturerEl.textContent = item.manufacturer;
+  optionSelectEl.textContent = item.options[0].title;
+  optionSelectEl.setAttribute('value', item.options[0].id)
+
   // 5. 이벤트 리스너 등록하기
-  cartFromEl.addEventListener("submit", e => {
+  cartFromEl.addEventListener("submit", async e => {
     e.preventDefault();
+
     // 지금 선택되어 있는 option 요소 객체의 value 어트리뷰트에 지정되어있는 값이 읽어와진다.
     const quantity = parseInt(e.target.elements.quantity.value);
-    console.log("quantity", quantity);
+    const option = parseInt(e.target.elements.option.value);
+
+    console.log('옵션:' + option)
+
+    await api.post("/cartItems", {
+      ordered: false,
+      quantity: quantity,
+      optionId: option
+    });
+
+    if (localStorage.getItem("token")) {
+      // 장바구니 호출
+      drawCartPage();
+    } else {
+      drawLoginForm();
+    }
 
 
-  // 장바구니 호출
-    drawCartPage(quantity);
   });
+
   // 6. 템플릿을 문서에 삽입
   rootEl.textContent = "";
   rootEl.appendChild(frag);
@@ -213,37 +234,50 @@ async function drawProductDetailsPage(productId) {
 // 장바구니
 async function drawCartPage() {
   // 1. 템플릿 복사
-  const listFrag = document.importNode(templates.cartList, true);
+  const listFrag = document.importNode(templates.cartListTemp, true);
   // 2. 요소 선택
   const cartlistEl = listFrag.querySelector(".cart-list");
   // 3. 필요한 데이터 불러오기
   // 장바구니에 담지 않은 물건 불러오기
-  const { data: cartlist } = await api.get("/cartItems", {
+  const { data: cartlist } = await api.get("/cartItems",{
     params: {
-      _embed: "options",
-      // orderId: -1
+      ordered: false,
+      _expand: 'option'
     }
   });
+  console.log("장바구니데이터", cartlist);
 
-  // 장바구니에 어떻게 담냐고!!!
-  // 해당 아이템을 장바구니에 어떻게 넣냐고!!!
+  const params = new URLSearchParams();
+  cartlist.forEach(c => params.append("id", c.option.productId));
+
+  const { data: options } = await api.get("/products", {
+    params
+  });
+
+  console.log("장바구니 데이터 + 옵션데이터", options);
+
 
   cartlist.forEach(cartItem => {
     // 1. 템플릿 복사
-    const frag = document.importNode(templates.cartItem, true);
+    const frag = document.importNode(templates.cartItemTemp, true);
     // 2. 요소 선택
     const productTitleEl = frag.querySelector(".item-title");
     const productImgEl = frag.querySelector(".item-img");
     const productPriceEl = frag.querySelector(".item-price");
 
-    productTitleEl.textContent = cartItem.title;
-    productImgEl.setAttribute("src", cartItem.mainImgUrl);
-    productImgEl.setAttribute("alt", cartItem.title);
-    productPriceEl.textContent = cartItem.options[0].price.toLocaleString();
+    // 4. 내용 채우기
+    const product = options.find(item => item.id === cartItem.option.productId);
+    console.log("product", product);
+
+    productTitleEl.textContent = product.title;
+    productImgEl.setAttribute("src", product.mainImgUrl);
+    productImgEl.setAttribute("alt", product.title);
+    productPriceEl.textContent = (cartItem.option.price).toLocaleString();
 
     // 6. 템플릿을 문서에 삽입
     cartlistEl.appendChild(frag);
   });
+
   // 6. 템플릿을 문서에 삽입
   rootEl.textContent = "";
   rootEl.appendChild(listFrag);

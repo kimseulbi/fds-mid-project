@@ -23,7 +23,52 @@
     </header>
     <div class="container"></div>
     <footer class="footer">
-      <div class="content"></div>
+      <div class="footer-area">
+        <div class="footer-membar">
+          <ul>
+            <li><a href="#">이용안내</a></li>
+            <li><a href="#">개인정보처리방침</a></li>
+            <li><a href="#">이용약관</a></li>
+            <li><a href="#">제휴안내</a></li>
+            <li><a href="#">공지사항</a></li>
+          </ul>
+        </div>
+        <div class="content">
+          <div class="footer-logo">
+            <img src="images/main/logo/footerlogo.png" alt="배민문방구">
+          </div>
+          <!-- <div class="footer-company">
+            <ul>
+              <li><span>(주)우아한형제들</span></li>
+              <li><span>대표 : 김봉진</span></li>
+              <li><span>주소 : 서울시 송파구 위례성대로 2 (장은빌딩) 18층</span></li>
+            </ul>
+            <ul>
+              <li><span>사업자등록번호 : 120-87-65763 <a href="#">사업자정보확인</a></span></li>
+              <li><span>대표 : 김봉진</span></li>
+              <li><span>통신판매업신고번호 : 2012-서울송파-0515</span></li>
+              <li><span>개인정보보호책임자 : 박성철</span></li>
+            </ul>
+            <ul>
+              <li><span>고객센터 : 1670-9920</span></li>
+              <li><span>팩스 : 02-532-5854</span></li>
+              <li><span>이메일 : <a href="#">baemin_store@woowahan.com</a></span></li>
+            </ul>
+            <ul>
+              <li><span>호스팅제공 : 엔에이치엔고도(주)</span></li>
+            </ul>
+          </div> -->
+          <!-- <div>
+            <ul>
+              <li><span>고객님의 안전거래를 위해 현금 등으로 결제 시 KCP의 구매안전 서비스를 이용하실 수 있습니다.</span></li>
+              <li><a href="#">서비스 가입사실 확인</a></li>
+            </ul>
+          </div> -->
+          <!-- <div>
+            <span>ⓒ Woowa Brothers in Song-pa & seul</span>
+          </div> -->
+        </div>
+      </div>
     </footer>
   </div>
 
@@ -45,17 +90,18 @@
         <form class="login-form">
           <input type="text" name="username" placeholder="아이디">
           <input type="password" name="password" placeholder="비밀번호">
-          <button class="but-primary">로그인</button>
+          <button class="btn-primary">로그인</button>
+          <div class="login-membar-area">
+            <ul class="login-membar">
+              <li><a href="#">아이디 찾기</a></li>
+              <li><a href="#">비밀번호 찾기</a></li>
+              <li><a href="#">회원가입</a></li>
+            </ul>
+          </div>
+          <button class="btn-facebook">FACEBOOK</button>
         </form>
-        <div class="login-membar-area">
-          <ul class="login-membar">
-            <li><a href="#">아이디 찾기</a></li>
-            <li><a href="#">비밀번호 찾기</a></li>
-            <li><a href="#">회원가입</a></li>
-          </ul>
-        </div>
       </section>
-    </div>
+      <div class="login-none"></div>
   </template>
 
   <!-- 상품 리스트(메인화면) -->
@@ -105,15 +151,18 @@
               <dd class="details-manufacturer"></dd>
               <dt class="subtitle count-tilte">구매수량</dt>
               <dd class="details-count">
+                  <select class="options readable-hidden" name="option">
+                    <option value=""></option>
+                  </select>
                 <input type="number" value="1" name="quantity" class="quantity input-number" /><span>개</span>
               </dd>
             </dl>
             <div>
-              <button class="details-btn-buy but-primary">구매하기</button>
+              <button class="details-btn-buy btn-primary">구매하기</button>
             </div>
             <div class="details-btn-set">
-              <button class="details-btn-cart but-default">장바구니</button>
-              <button class="details-btn-dibs but-default">찜하기</button>
+              <button class="details-btn-cart btn-default">장바구니</button>
+              <button class="details-btn-dibs btn-default">찜하기</button>
             </div>
           </form>
         </div>
@@ -173,7 +222,6 @@
         </tbody>
       </table>
     </form>
-    </div>
   </template>
 
   <script src="./index.js"></script>
