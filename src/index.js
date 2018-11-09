@@ -72,7 +72,7 @@ async function drawmemberInfo() {
       drawMainPage();
     });
     frag.querySelector(".member-cart").addEventListener("click", e => {
-      alert("장바구니");
+      drawCartPage();
     });
     frag.querySelector(".member-mypage").addEventListener("click", e => {
       alert("마이페이지");
@@ -83,12 +83,6 @@ async function drawmemberInfo() {
     });
     frag.querySelector(".member-join").addEventListener("click", e => {
       alert("회원가입");
-    });
-    frag.querySelector(".member-cart").addEventListener("click", e => {
-      alert("장바구니");
-    });
-    frag.querySelector(".member-mypage").addEventListener("click", e => {
-      alert("마이페이지");
     });
   }
   // 6. 템플릿을 문서에 삽입

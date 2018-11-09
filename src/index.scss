@@ -238,10 +238,11 @@ a {
     color: #666;
   }
 }
-.member-logout {
+.member-logout,.member-cart,.member-mypage{
   display: none;
 }
-.member-logout {
+
+.member-logout,.member-cart,.member-mypage {
   body.authed & {
     display: inline-block;
   }
@@ -441,6 +442,10 @@ a {
   }
   .login-none {
     height: 161px;
+  }
+  //장바구니
+  .cart-area{
+    margin: 135px 10px 0 20px;
   }
 }
 
