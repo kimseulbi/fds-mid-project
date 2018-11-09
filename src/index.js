@@ -202,18 +202,20 @@ async function drawProductDetailsPage(productId) {
     const quantity = parseInt(e.target.elements.quantity.value);
     const option = parseInt(e.target.elements.option.value);
 
-    console.log('옵션:' + option)
-
-    await api.post("/cartItems", {
-      ordered: false,
-      quantity: quantity,
-      optionId: option
-    });
-
     if (localStorage.getItem("token")) {
+      console.log('옵션:' + option)
+
+      await api.post("/cartItems", {
+        ordered: false,
+        quantity: quantity,
+        optionId: option
+      });
+
       // 장바구니 호출
       drawCartPage();
     } else {
+      // 로그인화면 호출
+      console.log('로그인')
       drawLoginForm();
     }
 
