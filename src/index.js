@@ -203,9 +203,7 @@ async function drawProductDetailsPage(productId) {
     const value = parseInt(e.target.value);
     const price = parseInt(productPriceEl.textContent.split(",").join(""));
 
-
-
-    if (!(Number.isNaN(value))) {
+    if (!Number.isNaN(value) && value > 0) {
       console.log("수량/가격: ", value, price);
       productTotalPriceEl.textContent = (value * price).toLocaleString();
       console.log("제품 토탈 가격: ", productTotalPriceEl.textContent);
@@ -247,6 +245,11 @@ async function drawCartPage() {
   const listFrag = document.importNode(templates.cartListTemp, true);
   // 2. 요소 선택
   const cartlistEl = listFrag.querySelector(".cart-list");
+  const backEl = listFrag.querySelector(".back");
+  const allDeleteEl = listFrag.querySelector(".all-delete");
+  const goProductList = listFrag.querySelector(".go-product-list");
+  const orderEl = listFrag.querySelector(".order");
+  const listTotalPrice = listFrag.querySelector(".list-total-price");
   // 3. 필요한 데이터 불러오기
   // 장바구니에 담지 않은 물건 불러오기
   const { data: cartlist } = await api.get("/cartItems", {
@@ -273,19 +276,33 @@ async function drawCartPage() {
     const productTitleEl = frag.querySelector(".item-title");
     const productImgEl = frag.querySelector(".item-img");
     const productPriceEl = frag.querySelector(".item-price");
+    const productdeleteEl = frag.querySelector(".item-delete");
 
     // 4. 내용 채우기
     const product = options.find(item => item.id === cartItem.option.productId);
-    console.log("product", product);
 
     productTitleEl.textContent = product.title;
     productImgEl.setAttribute("src", product.mainImgUrl);
     productImgEl.setAttribute("alt", product.title);
-    productPriceEl.textContent = cartItem.option.price.toLocaleString();
+    productPriceEl.textContent = (
+      cartItem.option.price * cartItem.quantity
+    ).toLocaleString();
+
+    // 5. 이벤트 리스너 등록하기
+    productdeleteEl.addEventListener('click', async e =>{
+      await api.delete(`/cartItems/${cartItem.id}`);
+      drawCartPage();
+    });
+
 
     // 6. 템플릿을 문서에 삽입
     cartlistEl.appendChild(frag);
   });
+
+  // 5. 이벤트 리스너 등록하기
+  // backEl.addEventListener("click", async e => {
+  //   window.history.back();
+  // });
 
   // 6. 템플릿을 문서에 삽입
   rootEl.textContent = "";
