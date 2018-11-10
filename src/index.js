@@ -175,14 +175,17 @@ async function drawProductDetailsPage(productId) {
   const productPriceEl = frag.querySelector(".details-price");
   const productmanufacturerEl = frag.querySelector(".details-manufacturer");
   const cartFromEl = frag.querySelector(".cart-form");
-  const optionSelectEl = frag.querySelector('.options > option');
+  const optionSelectEl = frag.querySelector(".options > option");
+  const quantityEl = frag.querySelector(".quantity");
+  const productTotalPriceEl = frag.querySelector(".details-total-price");
+
   // 3. 필요한 데이터 불러오기
   const { data: item } = await api.get(`/products/${productId}`, {
     params: {
       _embed: "options"
     }
   });
-  console.log('제품정보', item.options)
+  console.log("제품정보", item.options);
 
   // 4. 내용 채우기
   productTitleEl.textContent = item.title;
@@ -192,9 +195,19 @@ async function drawProductDetailsPage(productId) {
   productPriceEl.textContent = item.options[0].price.toLocaleString() + "원";
   productmanufacturerEl.textContent = item.manufacturer;
   optionSelectEl.textContent = item.options[0].title;
-  optionSelectEl.setAttribute('value', item.options[0].id)
+  optionSelectEl.setAttribute("value", item.options[0].id);
 
   // 5. 이벤트 리스너 등록하기
+  // 수량 이벤트
+  quantityEl.addEventListener("input", async e => {
+    const value = parseInt(e.target.value);
+    const price = parseInt(productPriceEl.textContent.split(",").join(""));
+    console.log("수량/가격: ", value, price);
+    productTotalPriceEl.textContent = (value * price).toLocaleString();
+    console.log("제품 토탈 가격: ", productTotalPriceEl.textContent);
+  });
+
+  // 장바구니 이벤트
   cartFromEl.addEventListener("submit", async e => {
     e.preventDefault();
 
@@ -203,23 +216,17 @@ async function drawProductDetailsPage(productId) {
     const option = parseInt(e.target.elements.option.value);
 
     if (localStorage.getItem("token")) {
-      console.log('옵션:' + option)
-
       await api.post("/cartItems", {
         ordered: false,
         quantity: quantity,
         optionId: option
       });
-
       // 장바구니 호출
       drawCartPage();
     } else {
       // 로그인화면 호출
-      console.log('로그인')
       drawLoginForm();
     }
-
-
   });
 
   // 6. 템플릿을 문서에 삽입
@@ -235,10 +242,10 @@ async function drawCartPage() {
   const cartlistEl = listFrag.querySelector(".cart-list");
   // 3. 필요한 데이터 불러오기
   // 장바구니에 담지 않은 물건 불러오기
-  const { data: cartlist } = await api.get("/cartItems",{
+  const { data: cartlist } = await api.get("/cartItems", {
     params: {
       ordered: false,
-      _expand: 'option'
+      _expand: "option"
     }
   });
   console.log("장바구니데이터", cartlist);
@@ -251,7 +258,6 @@ async function drawCartPage() {
   });
 
   console.log("장바구니 데이터 + 옵션데이터", options);
-
 
   cartlist.forEach(cartItem => {
     // 1. 템플릿 복사
@@ -268,7 +274,7 @@ async function drawCartPage() {
     productTitleEl.textContent = product.title;
     productImgEl.setAttribute("src", product.mainImgUrl);
     productImgEl.setAttribute("alt", product.title);
-    productPriceEl.textContent = (cartItem.option.price).toLocaleString();
+    productPriceEl.textContent = cartItem.option.price.toLocaleString();
 
     // 6. 템플릿을 문서에 삽입
     cartlistEl.appendChild(frag);
