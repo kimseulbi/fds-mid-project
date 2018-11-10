@@ -207,57 +207,62 @@ body {
       position: absolute;
       top: 20px;
       left: 10px;
-      a{
+      a {
         height: 50px;
       }
-      a,img {
+      a,
+      img {
         width: 130px;
       }
     }
   }
-}
-.main-member {
-  border: none;
-  float: right;
-  height: 90px;
-  margin-right: -50px;
-}
-li {
-  float: left;
-  text-align: right;
-  margin-right: 22px;
-}
-li,
-a {
-  display: inline-block;
-}
-a {
-  font-size: 1.2rem;
-  color: rgba(0, 0, 0, 0.3);
-  line-height: 90px;
-  font-weight: 700;
-  height: 90px;
-  &:hover {
-    color: #666;
+  .main-member {
+    border: none;
+    float: right;
+    height: 90px;
+    margin-right: -50px;
   }
-}
-.member-logout,.member-cart,.member-mypage{
-  display: none;
-}
-
-.member-logout,.member-cart,.member-mypage {
-  body.authed & {
+  li {
+    float: left;
+    text-align: right;
+    margin-right: 22px;
+  }
+  li,
+  a {
     display: inline-block;
   }
-}
-.member-login {
-  body.authed & {
+  a {
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.3);
+    line-height: 90px;
+    font-weight: 700;
+    height: 90px;
+    &:hover {
+      color: #666;
+    }
+  }
+  .member-logout,
+  .member-cart,
+  .member-mypage {
     display: none;
   }
-}
-.member-join {
-  body.authed & {
-    display: none;
+
+  .member-logout,
+  .member-cart,
+  .member-mypage {
+    body.authed & {
+      display: inline-block;
+    }
+  }
+  .member-login {
+    body.authed & {
+      display: none;
+    }
+  }
+  .member-join {
+    body.authed & {
+      display: none;
+    }
   }
 }
 
@@ -326,7 +331,6 @@ a {
     margin-top: 90px;
 
     .visual-img {
-      width: 100%;
       height: 500px;
       background-color: rgb(237, 236, 236);
       background: url("images/main/banner/sample2_2.png"),
@@ -344,6 +348,8 @@ a {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+      flex-wrap: wrap;
+
       .product-item {
         img {
           position: relative;
@@ -421,8 +427,8 @@ a {
           dd {
             color: #333;
             font-weight: 500;
-            span {
-              margin-left: 0.8em;
+            .text {
+              margin-left: 0.6em;
             }
           }
           .details-price {
@@ -430,7 +436,7 @@ a {
             font-weight: 700;
             font-family: $num-font-family;
           }
-          .details-before-price{
+          .details-before-price {
             font-weight: 400;
             color: #999;
             margin-right: 0.5em;
@@ -452,8 +458,15 @@ a {
     height: 161px;
   }
   //장바구니
-  .cart-area{
+  .cart-area {
     margin: 135px 10px 0 20px;
+    .cart-item {
+      th a {
+        img {
+          width: 70px;
+        }
+      }
+    }
   }
 }
 
@@ -464,16 +477,21 @@ a {
   height: 230px;
   border-bottom: 1px solid #333;
   background-color: #333;
-  position: relative;
+  .footer-area {
+    position: relative;
+  }
   .footer-logo {
     position: absolute;
     top: 30px;
-    right: 60px;
+    right: 0;
     img {
       width: 90px;
     }
   }
   .footer-membar {
+   ul{
+     display: inline-flex;
+   }
     a {
       font-size: 1.2rem;
       color: #8b8b8b;
