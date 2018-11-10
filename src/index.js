@@ -202,9 +202,16 @@ async function drawProductDetailsPage(productId) {
   quantityEl.addEventListener("input", async e => {
     const value = parseInt(e.target.value);
     const price = parseInt(productPriceEl.textContent.split(",").join(""));
-    console.log("수량/가격: ", value, price);
-    productTotalPriceEl.textContent = (value * price).toLocaleString();
-    console.log("제품 토탈 가격: ", productTotalPriceEl.textContent);
+
+
+
+    if (!(Number.isNaN(value))) {
+      console.log("수량/가격: ", value, price);
+      productTotalPriceEl.textContent = (value * price).toLocaleString();
+      console.log("제품 토탈 가격: ", productTotalPriceEl.textContent);
+    } else {
+      alert("구매수량은 숫자만 가능합니다");
+    }
   });
 
   // 장바구니 이벤트

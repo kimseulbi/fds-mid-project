@@ -158,7 +158,8 @@
                     <option value=""></option>
                   </select>
                 </div>
-                <input type="number" value="1" name="quantity" class="quantity input-number" min="1" onlynumber="true"/><span class="text">개</span>
+                <input type="number" value="1" name="quantity" class="quantity input-number" min="1" required/>
+                <span class="text">개</span>
               </dd>
               <dt class="readable-hidden">총가격</dt>
               <dd class="details-total-price readable-hidden"></dd>
@@ -167,7 +168,7 @@
               <button class="details-btn-buy btn-primary">구매하기</button>
             </div>
             <div class="details-btn-set">
-              <button class="details-btn-cart btn-default">장바구니</button>
+              <button type ="submit" class="details-btn-cart btn-default">장바구니</button>
               <button class="details-btn-dibs btn-default">찜하기</button>
             </div>
           </form>
