@@ -277,6 +277,8 @@ async function drawCartPage() {
     const productImgEl = frag.querySelector(".item-img");
     const productPriceEl = frag.querySelector(".item-price");
     const productdeleteEl = frag.querySelector(".item-delete");
+    const quantityEl = frag.querySelector(".quantity");
+    const modifiedEl = frag.querySelector(".item-modified");
 
     // 4. 내용 채우기
     const product = options.find(item => item.id === cartItem.option.productId);
@@ -287,13 +289,23 @@ async function drawCartPage() {
     productPriceEl.textContent = (
       cartItem.option.price * cartItem.quantity
     ).toLocaleString();
+    quantityEl.value = cartItem.quantity;
 
     // 5. 이벤트 리스너 등록하기
-    productdeleteEl.addEventListener('click', async e =>{
+    productdeleteEl.addEventListener("click", async e => {
+      e.preventDefault();
       await api.delete(`/cartItems/${cartItem.id}`);
       drawCartPage();
     });
 
+    modifiedEl.addEventListener("click", async e => {
+      e.preventDefault();
+      const quantity = parseInt(quantityEl.value);
+      await api.patch(`cartItems/${cartItem.id}`, {
+        quantity: quantity
+      });
+      drawCartPage();
+    });
 
     // 6. 템플릿을 문서에 삽입
     cartlistEl.appendChild(frag);
