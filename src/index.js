@@ -31,6 +31,7 @@ const logoEl = document.querySelector(".logo");
 const navEl = document.querySelector(".menu-item-text");
 const subMenuEl = document.querySelector(".sub-menu");
 const stationeryEl = document.querySelector(".stationery");
+const fashionEl = document.querySelector(".fashion");
 const livingEl = document.querySelector(".living");
 const collaboEl = document.querySelector(".collabo");
 
@@ -55,6 +56,9 @@ subMenuEl.addEventListener("mouseleave", e => {
 stationeryEl.addEventListener('click',e => {
   drawMainPage("stationery");
 })
+fashionEl.addEventListener("click", e => {
+  drawMainPage("fashion");
+});
 livingEl.addEventListener("click", e => {
   drawMainPage("living");
 });
@@ -317,6 +321,7 @@ async function drawCartPage() {
     const productTitleEl = frag.querySelector(".item-title");
     const productImgEl = frag.querySelector(".item-img");
     const productPriceEl = frag.querySelector(".item-price");
+    const productTotalPriceEl = frag.querySelector(".item-total-price");
     const productdeleteEl = frag.querySelector(".item-delete");
     const quantityEl = frag.querySelector(".quantity");
     const modifiedEl = frag.querySelector(".item-modified");
@@ -326,7 +331,8 @@ async function drawCartPage() {
     productTitleEl.textContent = product.title;
     productImgEl.setAttribute("src", product.mainImgUrl);
     productImgEl.setAttribute("alt", product.title);
-    productPriceEl.textContent = (cartItem.option.price * cartItem.quantity).toLocaleString();
+    productPriceEl.textContent = cartItem.option.price.toLocaleString();
+    productTotalPriceEl.textContent = (cartItem.option.price * cartItem.quantity).toLocaleString();
     quantityEl.value = cartItem.quantity;
     listPrice += cartItem.option.price * cartItem.quantity;
 
