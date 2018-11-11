@@ -215,53 +215,104 @@ body {
         width: 130px;
       }
     }
-  }
-  .main-member {
-    border: none;
-    float: right;
-    height: 90px;
-    margin-right: -50px;
-  }
-  li {
-    float: left;
-    text-align: right;
-    margin-right: 22px;
-  }
-  li,
-  a {
-    display: inline-block;
-  }
-  a {
-    font-size: 1.2rem;
-    color: rgba(0, 0, 0, 0.3);
-    line-height: 90px;
-    font-weight: 700;
-    height: 90px;
-    &:hover {
-      color: #666;
+    .menu {
+      float: left;
+      padding-left: 200px;
+      .menu-item {
+        line-height: 90px;
+        height: 90px;
+        position: relative;
+        span {
+          font-size: 1.4rem;
+          color: #222;
+          font-weight: 700;
+          &:hover {
+            border-bottom: 3px solid #222;
+          }
+        }
+      }
     }
-  }
-  .member-logout,
-  .member-cart,
-  .member-mypage {
-    display: none;
-  }
-
-  .member-logout,
-  .member-cart,
-  .member-mypage {
-    body.authed & {
+    .sub-menu {
+      display: none;
+      position: absolute;
+      width: 140px;
+      top: 75px;
+      left: -13px;
+      background: #f6f6f6;
+      box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+      li,
+      a {
+        height: 30px;
+        display: block;
+        text-align: left;
+      }
+      a {
+        line-height: 10px;
+        padding: 10px 15px 15px 15px;
+        color: #222;
+        font-size: 1.2rem;
+        font-weight: normal;
+        &:hover{
+          color: #222;
+          font-weight: 700;
+        }
+      }
+    }
+    .sub-menu {
+      body.show & {
+        display: block;
+      }
+    }
+    .main-member {
+      border: none;
+      float: right;
+      height: 90px;
+      margin-right: -50px;
+      li {
+        float: left;
+        text-align: right;
+        margin-right: 22px;
+      }
+      .last {
+        margin-right: 0;
+      }
+    }
+    li,
+    a {
       display: inline-block;
     }
-  }
-  .member-login {
-    body.authed & {
+    a {
+      font-size: 1.2rem;
+      color: rgba(0, 0, 0, 0.3);
+      line-height: 90px;
+      font-weight: 700;
+      height: 90px;
+      &:hover {
+        color: #666;
+      }
+    }
+    .member-logout,
+    .member-cart,
+    .member-mypage {
       display: none;
     }
-  }
-  .member-join {
-    body.authed & {
-      display: none;
+
+    .member-logout,
+    .member-cart,
+    .member-mypage {
+      body.authed & {
+        display: inline-block;
+      }
+    }
+    .member-login {
+      body.authed & {
+        display: none;
+      }
+    }
+    .member-join {
+      body.authed & {
+        display: none;
+      }
     }
   }
 }
@@ -369,6 +420,11 @@ body {
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
+        }
+        .state {
+          height: 20px;
+          width: auto;
+          margin-top: 10.4px;
         }
         .item-price-unit {
           float: right;
@@ -489,9 +545,9 @@ body {
     }
   }
   .footer-membar {
-   ul{
-     display: inline-flex;
-   }
+    ul {
+      display: inline-flex;
+    }
     a {
       font-size: 1.2rem;
       color: #8b8b8b;
