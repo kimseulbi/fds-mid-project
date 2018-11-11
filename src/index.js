@@ -179,7 +179,13 @@ async function drawMainPage(category) {
     productImgEl.setAttribute("alt", productItem.title);
     productPriceEl.textContent = productItem.options[0].price.toLocaleString();
     productBeforePriceEl.textContent = productItem.options[0].beforePrice;
-    stateEl.setAttribute("src", productItem.state);
+
+    if (productItem.state !== null){
+      stateEl.setAttribute("src", productItem.state);
+    } else {
+      stateEl.classList.add("hidden");
+    }
+
     // 6. 템플릿을 문서에 삽입
     listEl.appendChild(frag);
     // 5. 이벤트 리스너 등록하기

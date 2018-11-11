@@ -222,6 +222,7 @@ body {
         line-height: 90px;
         height: 90px;
         position: relative;
+        margin-right: 30px;
         span {
           font-size: 1.4rem;
           color: #222;
@@ -252,7 +253,7 @@ body {
         color: #222;
         font-size: 1.2rem;
         font-weight: normal;
-        &:hover{
+        &:hover {
           color: #222;
           font-weight: 700;
         }
@@ -320,7 +321,7 @@ body {
 // container
 .container {
   position: relative;
-  min-width: 1000px;
+  width: 1000px;
   height: 100%;
   margin: 0 auto;
   // 로그인화면
@@ -407,6 +408,12 @@ body {
           background: #888;
           width: 220px;
           height: 272px;
+        }
+        .product-img{
+          display: inline-flex;
+        }
+        .product-img .hidden{
+          display: none;
         }
         .item-box {
           padding: 1em 0 4rem 0;
@@ -516,6 +523,15 @@ body {
   //장바구니
   .cart-area {
     margin: 135px 10px 0 20px;
+    h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      text-align: left;
+      color: #222;
+    }
+    table {
+      margin-top: 15px;
+    }
     .cart-item {
       th a {
         img {
