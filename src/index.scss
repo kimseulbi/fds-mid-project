@@ -321,7 +321,7 @@ body {
 // container
 .container {
   position: relative;
-  width: 1000px;
+  min-width: 1000px;
   height: 100%;
   margin: 0 auto;
   // 로그인화면
