@@ -555,6 +555,19 @@ body {
           width: 70px;
         }
       }
+      .cart-btn-set {
+        button {
+          display: inline-block;
+          padding: 0 3rem;
+        }
+        .order {
+          width: auto;
+        }
+      }
+    }
+    .list-total-price {
+      display: flex;
+      justify-content: flex-end;
     }
   }
 }
@@ -601,7 +614,7 @@ body {
 }
 // button 디자인
 .btn-primary {
-  border: 0;
+  border: 1px solid #444;
   text-align: center;
   height: 60px;
   background-color: #444;
@@ -633,6 +646,13 @@ body {
   &:hover {
     background-color: #f6f6f6;
   }
+}
+.btn-small {
+  @extend .btn-default;
+  padding: 0 2rem;
+  height: 40px;
+  line-height: 40px;
+  width: auto;
 }
 .btn-facebook {
   border: 0;

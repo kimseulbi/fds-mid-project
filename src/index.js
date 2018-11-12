@@ -33,7 +33,9 @@ const subMenuEl = document.querySelector(".sub-menu");
 const stationeryEl = document.querySelector(".stationery");
 const fashionEl = document.querySelector(".fashion");
 const livingEl = document.querySelector(".living");
+const travelEl = document.querySelector(".travel");
 const collaboEl = document.querySelector(".collabo");
+const grasshopperEl = document.querySelector(".grasshopper");
 
 // 페이지 그리는 함수 작성 순서
 // 1. 템플릿 복사
@@ -59,11 +61,17 @@ stationeryEl.addEventListener('click',e => {
 fashionEl.addEventListener("click", e => {
   drawMainPage("fashion");
 });
+travelEl.addEventListener("click", e => {
+  drawMainPage("travel");
+});
 livingEl.addEventListener("click", e => {
   drawMainPage("living");
 });
 collaboEl.addEventListener("click", e => {
   drawMainPage("collabo");
+});
+grasshopperEl.addEventListener("click", e => {
+  drawMainPage("grasshopper");
 });
 
 
