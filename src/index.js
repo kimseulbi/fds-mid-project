@@ -55,9 +55,9 @@ subMenuEl.addEventListener("mouseleave", e => {
 });
 
 // 카테고리 작업
-stationeryEl.addEventListener('click',e => {
+stationeryEl.addEventListener("click", e => {
   drawMainPage("stationery");
-})
+});
 fashionEl.addEventListener("click", e => {
   drawMainPage("fashion");
 });
@@ -73,7 +73,6 @@ collaboEl.addEventListener("click", e => {
 grasshopperEl.addEventListener("click", e => {
   drawMainPage("grasshopper");
 });
-
 
 // 로고를 누르면 첫페이지로 이동
 logoEl.addEventListener("click", e => {
@@ -162,12 +161,12 @@ async function drawMainPage(category) {
   // 2. 요소 선택
   const listEl = listFrag.querySelector(".product-list");
   // 3. 필요한 데이터 불러오기
-  const  params = {
-     _embed: "options"
-   }
+  const params = {
+    _embed: "options"
+  };
 
   if (category) {
-    params.category = category
+    params.category = category;
   }
   const { data: list } = await api.get(`/products`, {
     params
@@ -192,7 +191,7 @@ async function drawMainPage(category) {
     productPriceEl.textContent = productItem.options[0].price.toLocaleString();
     productBeforePriceEl.textContent = productItem.options[0].beforePrice;
 
-    if (productItem.state !== null){
+    if (productItem.state !== null) {
       stateEl.setAttribute("src", productItem.state);
     } else {
       stateEl.classList.add("hidden");
@@ -340,11 +339,11 @@ async function drawCartPage() {
     productImgEl.setAttribute("src", product.mainImgUrl);
     productImgEl.setAttribute("alt", product.title);
     productPriceEl.textContent = cartItem.option.price.toLocaleString();
-    productTotalPriceEl.textContent = (cartItem.option.price * cartItem.quantity).toLocaleString();
+    productTotalPriceEl.textContent = (
+      cartItem.option.price * cartItem.quantity
+    ).toLocaleString();
     quantityEl.value = cartItem.quantity;
     listPrice += cartItem.option.price * cartItem.quantity;
-
-
 
     // 5. 이벤트 리스너 등록하기
     productdeleteEl.addEventListener("click", async e => {
